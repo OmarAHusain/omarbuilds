@@ -128,7 +128,7 @@ ${noindex ? '<meta name="robots" content="noindex, follow">' : ""}
 </head>
 <body class="${cls}">
 <header class="top">
-  <a class="logo" href="/" aria-label="OmarBuilds home"><span class="br">[</span>OMAR<b>BUILDS</b><span class="br">]</span></a>
+  <a class="logo" href="/" aria-label="OmarBuilds home"><img src="/media/logo.png" alt="OmarBuilds" width="1484" height="308"></a>
   <nav>
     <a href="/#videos">Videos</a>
     <a href="/#builds">Builds</a>
@@ -149,8 +149,7 @@ ${body}
 }
 
 const sectionHead = (label, title, extra = "") =>
-  `<div class="sec-head"><span class="eyebrow"><h2><span class="br">[</span> ${esc(label)} <span class="br">]</span></h2></span>${extra}</div>`;
-// <h2>${title}</h2>
+  `<div class="sec-head"><h2 class="eyebrow"><span class="ck ck-l" aria-hidden="true"></span><span class="lbl">${esc(label)}</span><span class="ck ck-r" aria-hidden="true"></span></h2>${extra}</div>`;
 const videoCard = (v, { big = false } = {}) => `
 <a class="video ${big ? "video-big" : ""} ${isShort(v) ? "short" : ""}" href="${yt(v.id)}" rel="noopener">
   <span class="thumb"><img src="${thumb(v.id, big ? "maxresdefault" : "hqdefault")}" alt="" loading="lazy" width="480" height="360"><span class="play"></span>${isShort(v) ? '<span class="tag">Short</span>' : ""}</span>
@@ -192,7 +191,7 @@ function homePage(videos, press) {
     <p class="lead">Full builds on YouTube. Files, code and parts lists on Patreon.</p>
     <div class="row">
       <a class="btn btn-red" href="${site.links[0].url}" rel="noopener">▶ Watch on YouTube</a>
-      <a class="btn" href="${site.patreon.url}" rel="noopener">Support on Patreon</a>
+      <a class="btn btn-white" href="${site.patreon.url}" rel="noopener">Support on Patreon</a>
     </div>
   </div>
   ${featured ? `<a class="hero-video" href="${yt(featured.id)}" rel="noopener"><img src="${thumb(featured.id, "maxresdefault")}" alt="${esc(featured.title)}" width="1280" height="720"><span class="play"></span><span class="cap">Latest build · ${esc(featured.title)}</span></a>` : ""}
@@ -234,7 +233,7 @@ ${press.length ? `<section id="press">
   <div>
     ${sectionHead("About", "Hey, I'm Omar")}
     <p class="lead">${esc(site.about)}</p>
-    <div class="row">${site.links.map((l) => `<a class="btn ghost small" href="${l.url}" rel="noopener">${esc(l.label)}</a>`).join("")}</div>
+    <div class="row">${site.links.map((l) => `<a class="btn small social s-${l.id}" href="${l.url}" rel="noopener">${esc(l.label)}</a>`).join("")}</div>
   </div>
 </section>`;
 
@@ -261,7 +260,7 @@ function pressArticlePage(p) {
   const wayback = `https://web.archive.org/web/*/${p.sourceUrl}`;
   const body = `
 <article class="article">
-  <p class="eyebrow"><span class="br">[</span> Archived copy <span class="br">]</span></p>
+  <p class="eyebrow ck-wrap"><span class="ck ck-l" aria-hidden="true"></span><span class="lbl">Archived copy</span><span class="ck ck-r" aria-hidden="true"></span></p>
   <h1>${esc(p.title)}</h1>
   <p class="byline">By ${esc(p.author)} · <a href="${p.sourceUrl}" rel="noopener">${esc(p.sourceName)}</a> · ${fmtDate(p.date)}</p>
   <div class="notice">
@@ -291,7 +290,7 @@ function linksPage() {
   <h1>OmarBuilds</h1>
   <p class="lead">${esc(site.tagline)}</p>
   <div class="stack">
-    ${site.links.map((l) => `<a class="btn ${l.primary ? "btn-red" : ""} wide" href="${l.url}" rel="noopener"><span>${esc(l.label)}</span><span class="handle">${esc(l.handle)}</span></a>`).join("")}
+    ${site.links.map((l) => `<a class="btn wide social s-${l.id}" href="${l.url}" rel="noopener"><span>${esc(l.label)}</span><span class="handle">${esc(l.handle)}</span></a>`).join("")}
     <a class="btn ghost wide" href="/"><span>omarbuilds.com</span><span class="handle">the full site</span></a>
   </div>
 </section>`;
@@ -319,6 +318,6 @@ await out("favicon.svg", favicon);
 await out("CNAME", new URL(site.domain).host);
 await out("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`);
 await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["/", "/press/", "/links/"].map((u) => `  <url><loc>${site.domain}${u}</loc><lastmod>${BUILD_DATE}</lastmod></url>`).join("\n")}\n</urlset>\n`);
-for (const f of ["profile.jpg", "og-banner.jpg", "Omarbuilds_Banner.png"]) await cp(path.join(ROOT, "media", f), path.join(DIST, "media", f));
+for (const f of ["profile.jpg", "og-banner.jpg", "Omarbuilds_Banner.png", "logo.png"]) await cp(path.join(ROOT, "media", f), path.join(DIST, "media", f));
 if (existsSync(path.join(ROOT, "content/press/images"))) await cp(path.join(ROOT, "content/press/images"), path.join(DIST, "press/images"), { recursive: true });
 console.log(`built dist/ — ${videos.length} videos, ${press.length} press articles`);
