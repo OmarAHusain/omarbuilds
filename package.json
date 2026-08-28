@@ -1,0 +1,12 @@
+{
+  "name": "omarbuilds.com",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "omarbuilds.com — static site, zero dependencies",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "npm run build && python3 -m http.server 8080 --directory dist"
+  },
+  "engines": { "node": ">=20" }
+}

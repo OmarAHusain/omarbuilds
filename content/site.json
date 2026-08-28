@@ -1,0 +1,71 @@
+{
+  "name": "OmarBuilds",
+  "domain": "https://omarbuilds.com",
+  "tagline": "I build robots that you can build too.",
+  "description": "OmarBuilds — 3D-printed robots, Dynamixel servos, Arduino and Python. Watch the builds on YouTube and get the files on Patreon.",
+  "youtubeChannelId": "UCOnWeamStD8AVMtdVMogq-g",
+  "patreon": {
+    "url": "https://www.patreon.com/omarbuilds",
+    "blurb": "Every build's STL files, Arduino & Python code and parts list live on Patreon. Files come with the Builder tier — but there's a free tier too.",
+    "filesTier": "Builder",
+    "tiers": [
+      {
+        "name": "Free",
+        "price": "$0",
+        "period": "",
+        "tagline": "Follow along",
+        "perks": ["Public posts and updates", "See what's coming next"]
+      },
+      {
+        "name": "Hobbyist",
+        "price": "$5",
+        "period": "/month",
+        "tagline": "Support the builds",
+        "perks": ["Behind-the-scenes posts", "Work-in-progress updates", "Keeps the parts bucket topped up"]
+      },
+      {
+        "name": "Builder",
+        "price": "$10",
+        "period": "/month",
+        "tagline": "Build it yourself",
+        "highlight": true,
+        "perks": ["STL files for every build", "Project code repo (Arduino + Python)", "Electronics parts list", "Early access to videos", "Everything in Hobbyist"]
+      }
+    ]
+  },
+  "links": [
+    { "id": "youtube",   "label": "YouTube",   "handle": "@omar.builds", "url": "https://www.youtube.com/@omar.builds", "primary": true },
+    { "id": "instagram", "label": "Instagram", "handle": "@omarbuilds",  "url": "https://www.instagram.com/omarbuilds/" },
+    { "id": "tiktok",    "label": "TikTok",    "handle": "@omarbuilds",  "url": "https://www.tiktok.com/@omarbuilds" },
+    { "id": "patreon",   "label": "Patreon",   "handle": "omarbuilds",   "url": "https://www.patreon.com/omarbuilds" },
+    { "id": "reddit",    "label": "Reddit",    "handle": "u/omarbuilds", "url": "https://www.reddit.com/user/omarbuilds/" },
+    { "id": "threads",   "label": "Threads",   "handle": "@omarbuilds",  "url": "https://www.threads.com/@omarbuilds" },
+    { "id": "x",         "label": "X",         "handle": "@OmarBuilds",  "url": "https://x.com/OmarBuilds" }
+  ],
+  "featuredVideoId": "pEU04FVNeZw",
+  "builds": [
+    {
+      "title": "Doc Ock's Robot Claw",
+      "status": "Files available",
+      "summary": "A four-fingered, Doc Ock–style claw that holds a globe and slowly spins it on your desk. 12 Dynamixel XL430 servos, an Arduino OpenRB-150, red LED filaments, and four pots to dial in speed, direction and finger offsets. Inspired by Mark Setrakian.",
+      "videoId": "pEU04FVNeZw",
+      "patreon": true,
+      "press": "xda-robot-claw"
+    },
+    {
+      "title": "The Leaper (Arc Raiders)",
+      "status": "In progress",
+      "summary": "Building the Leaper from Arc Raiders. It already looks like one — the question is whether it'll jump.",
+      "videoId": "BtkQo7wJPEE",
+      "patreon": false
+    },
+    {
+      "title": "3D-Printed Ray-Ban Sunglasses",
+      "status": "Watch",
+      "summary": "Reverse-engineering and 3D printing a pair of $200 Ray-Bans — the same ones I wear in every video.",
+      "videoId": "Mhe74fCnzr8",
+      "patreon": false
+    }
+  ],
+  "about": "I'm Omar, a mechatronics engineer who builds robots on camera — 3D-printed, servo-driven, usually a little bit evil. Every build gets a full video on YouTube, and the files, code and parts list go on Patreon so you can build it too."
+}
