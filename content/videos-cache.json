@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-08-28T22:31:23.813Z",
+  "fetched": "2026-08-28T22:58:29.272Z",
   "entries": [
     {
       "id": "2hGpWBqbPOI",
@@ -12,7 +12,7 @@
       "id": "pEU04FVNeZw",
       "title": "I Built Doc Ock's Robot Claw",
       "published": "2026-07-30T12:51:55+00:00",
-      "views": 1331,
+      "views": 1332,
       "description": "I built a custom 3d printed robot claw, with a bit of Arduino and Python. You can make one too. \n\nFind the files, code, and electronics parts list on my Patreon: https://www.patreon.com/omarbuilds\n\nMark Setrakian (the inspiration for this video): https://www.marksetrakian.com\n\nRobotics Toolbox for Python: https://petercorke.github.io/robotics-toolbox-python\n\nVideo about my sunglasses here: https://youtu.be/Mhe74fCnzr8"
     },
     {

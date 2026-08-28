@@ -1,12 +1,12 @@
 {
   "name": "OmarBuilds",
   "domain": "https://omarbuilds.com",
-  "tagline": "I build robots that you can build too.",
+  "tagline": "I'm Omar and I build robots",
   "description": "OmarBuilds — 3D-printed robots, Dynamixel servos, Arduino and Python. Watch the builds on YouTube and get the files on Patreon.",
   "youtubeChannelId": "UCOnWeamStD8AVMtdVMogq-g",
   "patreon": {
     "url": "https://www.patreon.com/omarbuilds",
-    "blurb": "Every build's STL files, Arduino & Python code and parts list live on Patreon. Files come with the Builder tier — but there's a free tier too.",
+    "blurb": "Every robot's STL files, Arduino & Python code and parts list live on Patreon. Files come with the Builder tier.",
     "filesTier": "Builder",
     "tiers": [
       {
@@ -55,7 +55,7 @@
     {
       "title": "The Leaper (Arc Raiders)",
       "status": "In progress",
-      "summary": "Building the Leaper from Arc Raiders. It already looks like one — the question is whether it'll jump.",
+      "summary": "Building the Leaper from Arc Raiders. Nead to figure out how to make it jump.",
       "videoId": "BtkQo7wJPEE",
       "patreon": false
     },
@@ -67,5 +67,5 @@
       "patreon": false
     }
   ],
-  "about": "I'm Omar, a mechatronics engineer who builds robots on camera — 3D-printed, servo-driven, usually a little bit evil. Every build gets a full video on YouTube, and the files, code and parts list go on Patreon so you can build it too."
+  "about": "I'm Omar and I build robots. Every build gets a full video on YouTube, and the files, code and parts list go on Patreon so you can build it too."
 }

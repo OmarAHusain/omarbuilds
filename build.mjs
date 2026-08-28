@@ -149,8 +149,8 @@ ${body}
 }
 
 const sectionHead = (label, title, extra = "") =>
-  `<div class="sec-head"><span class="eyebrow"><span class="br">[</span> ${esc(label)} <span class="br">]</span></span><h2>${title}</h2>${extra}</div>`;
-
+  `<div class="sec-head"><span class="eyebrow"><h2><span class="br">[</span> ${esc(label)} <span class="br">]</span></h2></span>${extra}</div>`;
+// <h2>${title}</h2>
 const videoCard = (v, { big = false } = {}) => `
 <a class="video ${big ? "video-big" : ""} ${isShort(v) ? "short" : ""}" href="${yt(v.id)}" rel="noopener">
   <span class="thumb"><img src="${thumb(v.id, big ? "maxresdefault" : "hqdefault")}" alt="" loading="lazy" width="480" height="360"><span class="play"></span>${isShort(v) ? '<span class="tag">Short</span>' : ""}</span>
@@ -183,13 +183,13 @@ function homePage(videos, press) {
   }).join("");
 
   const pressList = press.slice(0, 3).map(pressCard).join("");
-
+// // <p class="eyebrow"><span class="br">[</span> Robotics · 3D printing · Arduino <span class="br">]</span></p>
   const body = `
 <section class="hero">
   <div class="hero-text">
-    <p class="eyebrow"><span class="br">[</span> Robotics · 3D printing · Arduino <span class="br">]</span></p>
-    <h1>I build robots<br>that <em>you</em> can build too.</h1>
-    <p class="lead">Full builds on YouTube. Files, code and parts lists on Patreon. No mystery, no black boxes — just servos, plastic and a little bit of evil.</p>
+    
+    <h1>I'm Omar <br> and I build <em>robots</em></h1>
+    <p class="lead">Full builds on YouTube. Files, code and parts lists on Patreon.</p>
     <div class="row">
       <a class="btn btn-red" href="${site.links[0].url}" rel="noopener">▶ Watch on YouTube</a>
       <a class="btn" href="${site.patreon.url}" rel="noopener">Support on Patreon</a>
@@ -238,7 +238,7 @@ ${press.length ? `<section id="press">
   </div>
 </section>`;
 
-  return page({ title: "OmarBuilds — I build robots that you can build too", description: site.description, canonical: `${site.domain}/`, body });
+  return page({ title: "OmarBuilds: I build robots", description: site.description, canonical: `${site.domain}/`, body });
 }
 
 const pressCard = (p) => `
