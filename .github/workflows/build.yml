@@ -1,5 +1,5 @@
-# Builds the site on every push and once a day (so new YouTube videos show up
-# without a commit). Deploys to GitHub Pages. If you host on Netlify instead,
+# Builds the site on every push and once a week (so new YouTube videos and
+# follower counts refresh without a commit). Deploys to GitHub Pages. If you host on Netlify instead,
 # keep the schedule and swap the deploy step for a Netlify build-hook curl
 # (see README).
 name: Build & deploy
@@ -8,7 +8,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 6 * * *" # daily, 06:17 UTC
+    - cron: "17 6 * * 1" # weekly, Mondays 06:17 UTC
   workflow_dispatch:
 
 permissions:
