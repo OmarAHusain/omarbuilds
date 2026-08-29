@@ -373,7 +373,9 @@ function linksPage(stats) {
   return page({ title: "Links — OmarBuilds", description: "All OmarBuilds social links in one place.", canonical: `${site.domain}/links/`, body, cls: "minimal" });
 }
 
-const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><path d="M14 16h8v4h-4v24h4v4h-8zM50 16h-8v4h4v24h-4v4h8z" fill="#8a8a8a"/><text x="32" y="43" font-family="Helvetica,Arial,sans-serif" font-weight="900" font-size="30" text-anchor="middle" fill="#e10600">O</text></svg>`;
+// Corner-mark brackets (cf. .ck in styles.css). Box 1:3 = 17.3×52 (y 6→58),
+// each corner 70% wide × 30% tall = 12×16, stroke 5, 40% gap between corners. White.
+const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><g fill="#fff"><path d="M4 6h12v5H9v11H4zM4 42h5v11h7v5H4zM48 6h12v16h-5V11h-7zM55 42h5v16H48v-5h7z"/></g><text x="32" y="48" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="900" font-size="44" text-anchor="middle" fill="#e10600">O</text></svg>`;
 
 // ---------- write ----------
 const [videos, press, stats] = await Promise.all([loadVideos(), loadPress(), loadStats()]);
