@@ -3,6 +3,7 @@
 import { readFile, writeFile, mkdir, rm, cp, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import https from "node:https";
 
 const ROOT = new URL(".", import.meta.url).pathname;
 const DIST = path.join(ROOT, "dist");
@@ -54,6 +55,81 @@ async function loadVideos() {
     return JSON.parse(await readFile(CACHE, "utf8")).entries;
   }
 }
+
+// ---------- follower counts (best-effort scrape, per-platform cache fallback) ----------
+const STATS_CACHE = path.join(ROOT, "content/stats-cache.json");
+const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+// Plain node:https rather than fetch — undici's default headers get a 400 from Instagram.
+const get = (url, headers = {}, redirects = 3) => new Promise((resolve, reject) => {
+  const req = https.get(url, { headers: { "user-agent": UA, "accept-language": "en-US", ...headers } }, (res) => {
+    if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) {
+      res.resume();
+      return resolve(get(new URL(res.headers.location, url).href, headers, redirects - 1));
+    }
+    if (res.statusCode !== 200) { res.resume(); return reject(new Error(`HTTP ${res.statusCode}`)); }
+    let body = "";
+    res.setEncoding("utf8");
+    res.on("data", (d) => (body += d));
+    res.on("end", () => resolve(body));
+  });
+  req.setTimeout(15000, () => req.destroy(new Error("timeout")));
+  req.on("error", reject);
+});
+const parseAbbrev = (s) => { // "1.96K" -> 1960
+  const m = String(s).replace(/,/g, "").match(/([\d.]+)\s*([KM])?/i);
+  if (!m) return null;
+  return Math.round(parseFloat(m[1]) * ({ K: 1e3, M: 1e6 }[(m[2] || "").toUpperCase()] || 1));
+};
+const STAT_SOURCES = {
+  youtube: { noun: "subscribers", fetch: async () => {
+    const html = await get(`https://www.youtube.com/channel/${site.youtubeChannelId}/about`, { cookie: "CONSENT=YES+1; SOCS=CAI" });
+    const m = html.match(/"([\d.,]+[KM]?) subscribers"/);
+    if (!m) throw new Error("no subscriber text");
+    return parseAbbrev(m[1]);
+  } },
+  instagram: { noun: "followers", fetch: async () => {
+    const json = await get("https://i.instagram.com/api/v1/users/web_profile_info/?username=omarbuilds", { "x-ig-app-id": "936619743392459" });
+    const m = json.match(/"edge_followed_by":\{"count":(\d+)/);
+    if (!m) throw new Error("no follower count");
+    return Number(m[1]);
+  } },
+  tiktok: { noun: "followers", fetch: async () => {
+    const html = await get("https://www.tiktok.com/@omarbuilds");
+    const m = html.match(/"followerCount":(\d+)/);
+    if (!m) throw new Error("no followerCount");
+    return Number(m[1]);
+  } },
+  patreon: { noun: "members", fetch: async () => {
+    const json = await get(`https://www.patreon.com/api/campaigns/${site.patreonCampaignId}?json-api-version=1.0`);
+    const m = json.match(/"patron_count":(\d+)/);
+    if (!m) throw new Error("no patron_count");
+    return Number(m[1]);
+  } },
+};
+async function loadStats() {
+  const cached = existsSync(STATS_CACHE) ? JSON.parse(await readFile(STATS_CACHE, "utf8")) : {};
+  const stats = { ...cached };
+  await Promise.all(Object.entries(STAT_SOURCES).map(async ([id, src]) => {
+    try {
+      const count = await src.fetch();
+      if (!Number.isFinite(count) || count <= 0) throw new Error(`bad value ${count}`);
+      stats[id] = { count, noun: src.noun, updated: new Date().toISOString() };
+      console.log(`stats: ${id} = ${count}`);
+    } catch (err) {
+      console.warn(`stats: ${id} failed (${err.message})${cached[id] ? ` — using cached ${cached[id].count}` : " — no cache, hidden"}`);
+    }
+  }));
+  await writeFile(STATS_CACHE, JSON.stringify(stats, null, 2) + "\n");
+  return stats;
+}
+const fmtCount = (n) => {
+  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M";
+  if (n >= 1e5) return Math.round(n / 1e3) + "K";
+  if (n >= 1e4) return (n / 1e3).toFixed(1).replace(/\.0$/, "") + "K";
+  if (n >= 1e3) return (n / 1e3).toFixed(2).replace(/\.?0+$/, "") + "K"; // 1.96K, like YouTube shows it
+  return String(n);
+};
+const statFor = (stats, id) => stats[id] ? { short: fmtCount(stats[id].count), long: `${stats[id].count.toLocaleString("en-US")} ${stats[id].noun}` } : null;
 
 // ---------- tiny markdown (enough for archived articles) ----------
 function inline(s) {
@@ -157,7 +233,7 @@ const videoCard = (v, { big = false } = {}) => `
 </a>`;
 
 // ---------- pages ----------
-function homePage(videos, press) {
+function homePage(videos, press, stats) {
   const byId = Object.fromEntries(videos.map((v) => [v.id, v]));
   const featured = byId[site.featuredVideoId] || videos.find((v) => !isShort(v)) || videos[0];
   const latest = videos.filter((v) => v.id !== featured?.id).slice(0, 6);
@@ -233,7 +309,7 @@ ${press.length ? `<section id="press">
   <div>
     ${sectionHead("About", "Hey, I'm Omar")}
     <p class="lead">${esc(site.about)}</p>
-    <div class="row">${site.links.map((l) => `<a class="btn small social s-${l.id}" href="${l.url}" rel="noopener">${esc(l.label)}</a>`).join("")}</div>
+    <div class="row">${site.links.map((l) => { const s = statFor(stats, l.id); return `<a class="btn small social s-${l.id}" href="${l.url}" rel="noopener"${s ? ` title="${esc(s.long)}"` : ""}>${esc(l.label)}${s ? `<span class="cnt">${s.short}</span>` : ""}</a>`; }).join("")}</div>
   </div>
 </section>`;
 
@@ -283,14 +359,14 @@ function pressArticlePage(p) {
   });
 }
 
-function linksPage() {
+function linksPage(stats) {
   const body = `
 <section class="linktree">
   <img class="avatar" src="/media/profile.jpg" alt="Omar" width="120" height="90">
   <h1>OmarBuilds</h1>
   <p class="lead">${esc(site.tagline)}</p>
   <div class="stack">
-    ${site.links.map((l) => `<a class="btn wide social s-${l.id}" href="${l.url}" rel="noopener"><span>${esc(l.label)}</span><span class="handle">${esc(l.handle)}</span></a>`).join("")}
+    ${site.links.map((l) => { const s = statFor(stats, l.id); return `<a class="btn wide social s-${l.id}" href="${l.url}" rel="noopener"><span>${esc(l.label)}${s ? `<span class="cnt">${s.short}</span>` : ""}</span><span class="handle">${esc(l.handle)}</span></a>`; }).join("")}
     <a class="btn ghost wide" href="/"><span>omarbuilds.com</span><span class="handle">the full site</span></a>
   </div>
 </section>`;
@@ -300,20 +376,20 @@ function linksPage() {
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><path d="M14 16h8v4h-4v24h4v4h-8zM50 16h-8v4h4v24h-4v4h8z" fill="#8a8a8a"/><text x="32" y="43" font-family="Helvetica,Arial,sans-serif" font-weight="900" font-size="30" text-anchor="middle" fill="#e10600">O</text></svg>`;
 
 // ---------- write ----------
-const [videos, press] = await Promise.all([loadVideos(), loadPress()]);
+const [videos, press, stats] = await Promise.all([loadVideos(), loadPress(), loadStats()]);
 await rm(DIST, { recursive: true, force: true });
 await mkdir(path.join(DIST, "press/images"), { recursive: true });
 await mkdir(path.join(DIST, "links"), { recursive: true });
 await mkdir(path.join(DIST, "media"), { recursive: true });
 
 const out = (rel, s) => writeFile(path.join(DIST, rel), s);
-await out("index.html", homePage(videos, press));
+await out("index.html", homePage(videos, press, stats));
 await out("press/index.html", pressIndexPage(press));
 for (const p of press) {
   await mkdir(path.join(DIST, "press", p.slug), { recursive: true });
   await out(`press/${p.slug}/index.html`, pressArticlePage(p));
 }
-await out("links/index.html", linksPage());
+await out("links/index.html", linksPage(stats));
 await out("favicon.svg", favicon);
 await out("CNAME", new URL(site.domain).host);
 await out("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`);

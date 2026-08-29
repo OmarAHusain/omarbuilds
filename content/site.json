@@ -38,10 +38,9 @@
     { "id": "instagram", "label": "Instagram", "handle": "@omarbuilds",  "url": "https://www.instagram.com/omarbuilds/" },
     { "id": "tiktok",    "label": "TikTok",    "handle": "@omarbuilds",  "url": "https://www.tiktok.com/@omarbuilds" },
     { "id": "patreon",   "label": "Patreon",   "handle": "omarbuilds",   "url": "https://www.patreon.com/omarbuilds" },
-    { "id": "reddit",    "label": "Reddit",    "handle": "u/omarbuilds", "url": "https://www.reddit.com/user/omarbuilds/" },
-    { "id": "threads",   "label": "Threads",   "handle": "@omarbuilds",  "url": "https://www.threads.com/@omarbuilds" },
-    { "id": "x",         "label": "X",         "handle": "@OmarBuilds",  "url": "https://x.com/OmarBuilds" }
+    { "id": "reddit",    "label": "Reddit",    "handle": "u/omarbuilds", "url": "https://www.reddit.com/user/omarbuilds/" }
   ],
+  "patreonCampaignId": "13190319",
   "featuredVideoId": "pEU04FVNeZw",
   "builds": [
     {

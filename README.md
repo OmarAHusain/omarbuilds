@@ -15,6 +15,7 @@ npm run serve   # build + local preview at http://localhost:8080
 | `content/press/*.md` | Archived press articles (see below). |
 | `content/press/images/` | Images for archived articles. |
 | `content/videos-cache.json` | Last successful YouTube feed fetch. Auto-updated by the build; used as fallback if YouTube is unreachable. |
+| `content/stats-cache.json` | Last known follower counts (YouTube, Instagram, TikTok, Patreon). Scraped at build time with no API keys; each platform falls back to its cached value if the scrape fails. The daily workflow commits both caches back so the fallback stays fresh. |
 | `media/` | Brand assets (`profile.jpg` and `og-banner.jpg` are the resized ones the site uses). |
 | `src/styles.css` | All styling. |
 | `build.mjs` | The build. Fetches the channel RSS, renders `/`, `/press/`, `/press/<slug>/`, `/links/`. |

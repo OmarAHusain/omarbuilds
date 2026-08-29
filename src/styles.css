@@ -84,10 +84,8 @@ h2.eyebrow .lbl, .ck-wrap .lbl { color: #fff; }
 .s-tiktok:hover { border-color: #25f4ee; }
 .s-patreon   { --brand: #ff424d; }
 .s-reddit    { --brand: #ff4500; }
-.s-threads   { --brand: #fff; color: #000; }
-.s-threads .handle { color: rgba(0,0,0,.65); }
-.s-x         { --brand: #000; border-color: #444; }
-.s-x:hover   { border-color: #fff; }
+.cnt { display: inline-block; margin-left: .5em; padding: .1em .5em; border-radius: 999px; background: rgba(0,0,0,.35); font-size: .8em; font-weight: 700; letter-spacing: .02em; vertical-align: 1px; }
+.s-tiktok .cnt { background: rgba(255,255,255,.14); }
 
 /* layout */
 main { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }

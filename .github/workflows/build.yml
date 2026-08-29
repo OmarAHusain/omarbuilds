@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # to commit refreshed caches (videos / follower counts)
   pages: write
   id-token: write
 
@@ -29,6 +29,12 @@ jobs:
         with:
           node-version: 20
       - run: npm run build
+      - name: Commit refreshed caches
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/videos-cache.json content/stats-cache.json
+          git diff --cached --quiet || git commit -m "chore: refresh feed + follower caches" && git push
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
