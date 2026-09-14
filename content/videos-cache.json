@@ -1,18 +1,18 @@
 {
-  "fetched": "2026-09-07T12:36:29.053Z",
+  "fetched": "2026-09-14T12:50:59.825Z",
   "entries": [
     {
       "id": "2hGpWBqbPOI",
       "title": "Just do it #3dprinting #engineering #robotics",
       "published": "2026-08-19T08:17:37+00:00",
-      "views": 1381,
+      "views": 1385,
       "description": ""
     },
     {
       "id": "pEU04FVNeZw",
       "title": "I Built Doc Ock's Robot Claw",
       "published": "2026-07-30T12:51:55+00:00",
-      "views": 1395,
+      "views": 1432,
       "description": "I built a custom 3d printed robot claw, with a bit of Arduino and Python. You can make one too. \n\nFind the files, code, and electronics parts list on my Patreon: https://www.patreon.com/omarbuilds\n\nMark Setrakian (the inspiration for this video): https://www.marksetrakian.com\n\nRobotics Toolbox for Python: https://petercorke.github.io/robotics-toolbox-python\n\nVideo about my sunglasses here: https://youtu.be/Mhe74fCnzr8"
     },
     {
@@ -40,14 +40,14 @@
       "id": "BtkQo7wJPEE",
       "title": "Kinda looks like a Leaper but will it jump? #robotics #arcraiders #3dprinting #evil",
       "published": "2026-03-14T13:28:43+00:00",
-      "views": 130838,
+      "views": 130839,
       "description": ""
     },
     {
       "id": "yxeQqGcdgLk",
       "title": "This isn’t even its final form #engineering #3dprinting #robotics #evil #robotis",
       "published": "2026-03-06T14:02:46+00:00",
-      "views": 1019024,
+      "views": 1019035,
       "description": ""
     },
     {
@@ -75,21 +75,21 @@
       "id": "nH4olCxsiYo",
       "title": "What should I build with 11 servos? #engineering #3dprinting #robotics #dynamixel #robotis",
       "published": "2026-01-15T14:17:42+00:00",
-      "views": 4678,
+      "views": 4680,
       "description": ""
     },
     {
       "id": "Y35pkGEV5Co",
       "title": "Playing Tic Tac Toe while we wait for new parts #3dprinting #robotics #engineering #robotis",
       "published": "2026-01-09T09:57:45+00:00",
-      "views": 59771,
+      "views": 59775,
       "description": ""
     },
     {
       "id": "Cm1QSsCfcXU",
       "title": "Learning robotics control, one singularity at a time #robotics #servo #3dprinting",
       "published": "2025-12-25T13:23:07+00:00",
-      "views": 41223,
+      "views": 41226,
       "description": ""
     },
     {
