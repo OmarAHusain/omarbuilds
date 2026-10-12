@@ -1,25 +1,25 @@
 {
-  "fetched": "2026-10-05T14:43:42.726Z",
+  "fetched": "2026-10-12T15:29:26.432Z",
   "entries": [
     {
       "id": "2hGpWBqbPOI",
       "title": "Just do it #3dprinting #engineering #robotics",
       "published": "2026-08-19T08:17:37+00:00",
-      "views": 1390,
+      "views": 1393,
       "description": ""
     },
     {
       "id": "pEU04FVNeZw",
       "title": "I Built Doc Ock's Robot Claw",
       "published": "2026-07-30T12:51:55+00:00",
-      "views": 1526,
+      "views": 1549,
       "description": "I built a custom 3d printed robot claw, with a bit of Arduino and Python. You can make one too. \n\nFind the files, code, and electronics parts list on my Patreon: https://www.patreon.com/omarbuilds\n\nMark Setrakian (the inspiration for this video): https://www.marksetrakian.com\n\nRobotics Toolbox for Python: https://petercorke.github.io/robotics-toolbox-python\n\nVideo about my sunglasses here: https://youtu.be/Mhe74fCnzr8"
     },
     {
       "id": "vZXrtaNN-74",
       "title": "Software is done, robot claw incoming #engineering #robotics #maker",
       "published": "2026-06-10T15:51:42+00:00",
-      "views": 1451,
+      "views": 1452,
       "description": ""
     },
     {
@@ -33,21 +33,21 @@
       "id": "ZESDibLDRJE",
       "title": "The robot claw is ready. Inspired by @msetrakian #engineering #3dprinting #robotics #evil",
       "published": "2026-04-03T13:53:57+00:00",
-      "views": 1933,
+      "views": 1934,
       "description": ""
     },
     {
       "id": "BtkQo7wJPEE",
       "title": "Kinda looks like a Leaper but will it jump? #robotics #arcraiders #3dprinting #evil",
       "published": "2026-03-14T13:28:43+00:00",
-      "views": 130846,
+      "views": 130847,
       "description": ""
     },
     {
       "id": "yxeQqGcdgLk",
       "title": "This isn’t even its final form #engineering #3dprinting #robotics #evil #robotis",
       "published": "2026-03-06T14:02:46+00:00",
-      "views": 1019056,
+      "views": 1019063,
       "description": ""
     },
     {
@@ -68,7 +68,7 @@
       "id": "GhoExT5u14k",
       "title": "Yes I’m adding LEDs to the evil claw robot #robotics #engineering #3dprinting #robotis",
       "published": "2026-01-23T12:55:51+00:00",
-      "views": 23590,
+      "views": 23591,
       "description": ""
     },
     {
@@ -82,14 +82,14 @@
       "id": "Y35pkGEV5Co",
       "title": "Playing Tic Tac Toe while we wait for new parts #3dprinting #robotics #engineering #robotis",
       "published": "2026-01-09T09:57:45+00:00",
-      "views": 59781,
+      "views": 59783,
       "description": ""
     },
     {
       "id": "Cm1QSsCfcXU",
       "title": "Learning robotics control, one singularity at a time #robotics #servo #3dprinting",
       "published": "2025-12-25T13:23:07+00:00",
-      "views": 41231,
+      "views": 41235,
       "description": ""
     },
     {
@@ -103,7 +103,7 @@
       "id": "-TyWQaBekSk",
       "title": "Robots have tantrums too #robotics #engineering #diy #3dprinting #robotis",
       "published": "2025-12-10T14:39:47+00:00",
-      "views": 9315,
+      "views": 9317,
       "description": ""
     }
   ]
